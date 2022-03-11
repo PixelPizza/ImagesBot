@@ -1,0 +1,57 @@
+{
+  "name": "imagesbot",
+  "version": "1.0.0",
+  "description": "",
+  "main": "./dist/index.js",
+  "directories": {
+    "lib": "src"
+  },
+  "files": [
+    "dist"
+  ],
+  "scripts": {
+    "update": "yarn up \"*\" -i",
+    "clean": "node scripts/clean-dist.mjs",
+    "prebuild": "yarn clean",
+    "build": "tsup",
+    "lint": "eslint --ext mjs,js,ts",
+    "lint:fix": "eslint --ext mjs,js,ts --fix",
+    "format": "prettier --write **/*.{ts,js,json,yml,yaml}",
+    "prepare": "husky install",
+    "start": "yarn build && node dist/index.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/PixelPizza/ImagesBot.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/PixelPizza/ImagesBot/issues"
+  },
+  "homepage": "https://github.com/PixelPizza/ImagesBot#readme",
+  "dependencies": {
+    "@discordjs/builders": "^0.12.0",
+    "@sapphire/decorators": "^4.3.0",
+    "@sapphire/discord.js-utilities": "^4.9.0",
+    "@sapphire/framework": "^3.0.0-next.98b2a8b.0",
+    "@sapphire/plugin-logger": "^2.2.0",
+    "discord-api-types": "^0.29.0",
+    "discord.js": "^13.6.0",
+    "dotenv": "^16.0.0",
+    "images-scraper": "^6.4.0",
+    "tslib": "^2.3.1"
+  },
+  "devDependencies": {
+    "@sapphire/eslint-config": "^4.3.0",
+    "@sapphire/ts-config": "^3.3.2",
+    "@types/node": "^17.0.21",
+    "@typescript-eslint/eslint-plugin": "^5.14.0",
+    "@typescript-eslint/parser": "^5.14.0",
+    "eslint": "^8.10.0",
+    "prettier": "^2.5.1",
+    "tsup": "^5.12.1",
+    "typescript": "^4.6.2"
+  }
+}
