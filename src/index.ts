@@ -2,6 +2,7 @@ import { ApplicationCommandRegistries, RegisterBehavior, SapphireClient } from "
 import { config } from "dotenv";
 import { existsSync, mkdirSync } from "fs";
 import "./container";
+import "@sapphire/plugin-logger/register";
 config();
 
 if (!existsSync("img")) mkdirSync("img");
