@@ -2,7 +2,6 @@ import { SlashCommandBuilder } from "@discordjs/builders";
 import { ApplyOptions } from "@sapphire/decorators";
 import { ApplicationCommandRegistry, Command } from "@sapphire/framework";
 import { CommandInteraction, MessageEmbed } from "discord.js";
-import type { Scraper } from "images-scraper";
 import { PaginatedMessage } from "@sapphire/discord.js-utilities";
 
 @ApplyOptions<Command.Options>({
@@ -36,20 +35,39 @@ export class SearchCommand extends Command {
 			ephemeral: true
 		});
 
-		// @ts-ignore - Typings are wrong
-		const results = (await this.container.imageSearch.scrape(
-			interaction.options.getString("query", true),
-			interaction.options.getInteger("limit", true)
-		)) as Scraper.ScrapeResult[];
+		const results = (
+			await this.container.search.image(interaction.options.getString("query", true), {
+				safe: true,
+				exclude_domains: ["instagram.com", "facebook.com", "wikimedia.org", "twitter.com", "youtube.com"]
+			})
+		)
+			.filter(
+				(result) =>
+					/^https?:\/\//.test(result.origin.website) &&
+					!["gstatic.com", "static-rmg.be", "persgroep.net"].some((url) => result.url.includes(url))
+			)
+			.splice(0, interaction.options.getInteger("limit", true));
 
 		const message = new PaginatedMessage().addPages(
 			results.map((result) => ({
 				embeds: [
 					new MessageEmbed()
 						.setColor("BLUE")
-						.setTitle(result.title)
-						.setURL(result.source)
+						.setTitle(result.origin.title)
+						.setURL(result.origin.website)
 						.setImage(result.url)
+						.addFields(
+							{
+								name: "Width",
+								value: result.width,
+								inline: true
+							},
+							{
+								name: "Height",
+								value: result.height,
+								inline: true
+							}
+						)
 				]
 			}))
 		);

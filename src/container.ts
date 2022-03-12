@@ -1,12 +1,10 @@
 import { container } from "@sapphire/framework";
-import Scraper from "images-scraper";
+import google from "googlethis";
 
 declare module "@sapphire/pieces" {
 	export interface Container {
-		imageSearch: Scraper;
+		search: typeof google;
 	}
 }
 
-container.imageSearch = new Scraper({
-	safe: true
-});
+container.search = google;
