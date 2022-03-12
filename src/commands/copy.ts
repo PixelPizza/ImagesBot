@@ -41,7 +41,7 @@ export class CopyCommand extends Command {
 							.setDescription("Copy an image from an attachment (not supported yet)")
 					),
 			{
-				guildIds: ["952332872709193729"]
+				idHints: ["952332872709193729"]
 			}
 		);
 	}
