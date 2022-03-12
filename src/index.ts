@@ -1,4 +1,4 @@
-import { ApplicationCommandRegistries, RegisterBehavior, SapphireClient } from "@sapphire/framework";
+import { ApplicationCommandRegistries, LogLevel, RegisterBehavior, SapphireClient } from "@sapphire/framework";
 import { config } from "dotenv";
 import { existsSync, mkdirSync } from "fs";
 import "./container";
@@ -9,7 +9,10 @@ if (!existsSync("img")) mkdirSync("img");
 
 const client = new SapphireClient({
 	intents: ["GUILDS", "GUILD_MESSAGES", "DIRECT_MESSAGES"],
-	partials: ["CHANNEL", "MESSAGE"]
+	partials: ["CHANNEL", "MESSAGE"],
+	logger: {
+		level: LogLevel.Debug
+	}
 });
 
 ApplicationCommandRegistries.setDefaultBehaviorWhenNotIdentical(RegisterBehavior.Overwrite);
