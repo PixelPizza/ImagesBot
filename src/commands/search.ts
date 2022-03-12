@@ -1,4 +1,3 @@
-import { SlashCommandBuilder } from "@discordjs/builders";
 import { ApplyOptions } from "@sapphire/decorators";
 import { ApplicationCommandRegistry, Command } from "@sapphire/framework";
 import { CommandInteraction, MessageEmbed } from "discord.js";
@@ -9,8 +8,8 @@ import { PaginatedMessage } from "@sapphire/discord.js-utilities";
 })
 export class SearchCommand extends Command {
 	public override registerApplicationCommands(registry: ApplicationCommandRegistry) {
-		registry.registerChatInputCommand(
-			new SlashCommandBuilder()
+		registry.registerChatInputCommand((builder) =>
+			builder
 				.setName(this.name)
 				.setDescription(this.description)
 				.addStringOption((input) =>
