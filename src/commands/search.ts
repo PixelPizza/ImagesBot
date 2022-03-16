@@ -47,6 +47,14 @@ export class SearchCommand extends Command {
 			)
 			.splice(0, interaction.options.getInteger("limit", true));
 
+		if (!results.length) {
+			return interaction.editReply({
+				embeds: [
+					new MessageEmbed().setColor("RED").setTitle("No images found").setDescription("No images could be found.")
+				]
+			});
+		}
+
 		const message = new PaginatedMessage().addPages(
 			results.map((result) => ({
 				embeds: [
