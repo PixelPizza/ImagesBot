@@ -1,5 +1,4 @@
 {
 	"$schema": "https://docs.renovatebot.com/renovate-schema.json",
-	"extends": ["github>PixelPizza/.github:renovate"],
-  "reviewers": ["JaronZ"]
+	"extends": ["github>PixelPizza/.github:renovate"]
 }
